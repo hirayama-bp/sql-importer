@@ -1,7 +1,5 @@
-import os
 import re
-from pathlib import Path
-from typing import Any, Dict, Iterator, List, Pattern, Union
+from typing import Any, Dict, Iterator, List, Pattern
 
 from psycopg2.extensions import connection
 from psycopg2.extras import DictCursor
@@ -17,13 +15,10 @@ class SQLModule:
         self.sql = sql
 
     def get_placeholders(self) -> List[str]:
-        return [
-            m.group(1)
-            for m in PLACEHOLDER_PATTERN.finditer(self.sql)
-        ]
+        return [m.group(1) for m in PLACEHOLDER_PATTERN.finditer(self.sql)]
 
     def check_enough_kwargs(self, kwargs: Dict[str, Any]):
-        placeholders = self.get_placeholders() 
+        placeholders = self.get_placeholders()
         for ph in placeholders:
             if ph not in kwargs:
                 raise ValueError(f"placeholder '{ph}' is not passed.")
