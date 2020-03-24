@@ -1,30 +1,21 @@
-version: "2"
-
+version: "3"
 services:
+  db:
+    image: postgres:12.2-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
   app:
-    image: python:latest
-    environment:
-      - PYTHONDONTWRITEBYTECODE=1
-    tty: true
-    command: /bin/bash
-    working_dir: /root/
+    build: .
     volumes:
-      - ./:/root/
-    command: |
-      bash -c "\
-      bash"
-    links:
-      - postgres:db
-
-    privileged: true
-
-  postgres:
-    image: postgres:latest
-    environment:
-      - PGDATA=/var/lib/postgresql/data/pgdata
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=postgres
-    volumes:
-      - ./data/postgresql/:/var/lib/postgresql/
-    expose:
-      - "5432"
+      - .:/root/app
+    depends_on:
+      - db
+    working_dir: /root/app
+    command: sh -c "while sleep 1000; do :; done"
