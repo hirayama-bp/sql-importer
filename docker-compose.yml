@@ -13,6 +13,8 @@ services:
 
   app:
     build: .
+    environment:
+      DB_URL: postgres://postgres:postgres@db:5432/postgres
     volumes:
       - .:/root/app
     depends_on:

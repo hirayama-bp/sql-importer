@@ -19,10 +19,10 @@ RUN set -ex \
 
 ENV POETRY_VIRTUALENVS_IN_PROJECT 1
 
-# COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml poetry.lock ./
 
-# RUN set -ex \
-#   && poetry install
+RUN set -ex \
+  && poetry install
 
 
 ENV PYTHONDONTWRITEBYTECODE 1
