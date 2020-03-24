@@ -22,7 +22,7 @@ ENV POETRY_VIRTUALENVS_IN_PROJECT 1
 COPY pyproject.toml poetry.lock ./
 
 RUN set -ex \
-  && poetry install
+  && poetry install -E postgresql
 
 
 ENV PYTHONDONTWRITEBYTECODE 1
