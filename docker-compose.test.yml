@@ -1,0 +1,19 @@
+version: "3"
+services:
+  db:
+    image: postgres:12.2-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    environment:
+      DB_URL: postgres://postgres:postgres@db:5432/postgres
+    depends_on:
+      - db
+    working_dir: /root/app
+    command: sh -c "while sleep 1000; do :; done"

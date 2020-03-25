@@ -1,0 +1,20 @@
+name: ci
+
+on:
+  push:
+
+env:
+  COMPOSE_FILE: docker-compose.test.yml
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+      - name: start db and app
+        run: docker-compose up -d
+      - name: run lint
+        run: docker-compose exec -T app ash -c "make lint"
+      - name: run test
+        run: docker-compose exec -T app ash -c "make test"

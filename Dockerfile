@@ -19,10 +19,16 @@ RUN set -ex \
 
 ENV POETRY_VIRTUALENVS_IN_PROJECT 1
 
+WORKDIR /root/app
+
 COPY pyproject.toml poetry.lock ./
 
 RUN set -ex \
   && poetry install -E postgresql
 
 
+# copy code
+
 ENV PYTHONDONTWRITEBYTECODE 1
+
+COPY . .
