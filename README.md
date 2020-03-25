@@ -1,5 +1,7 @@
 # sql-importer
 
+![](https://github.com/beproud/sql-importer/workflows/ci/badge.svg)
+
 Utility to import sql files as a python module.
 
 
@@ -8,7 +10,7 @@ Utility to import sql files as a python module.
 
 ## Install
 
-```bash
+```
 $ pip install sql-importer
 ```
 
@@ -60,7 +62,7 @@ init(os.path.dirname(__file__), globals(), connection, sql_type='postgresql')
 
 ### start up
 
-```bash
+```
 $ git clone git@github.com:beproud/sql-importer.git
 $ cd sql-importer
 $ docker-compose up -d
@@ -69,10 +71,10 @@ $ docker-compose exec app ash
 
 ### Try
 
-```bash
-app \# ls tests/postgresql/sqls
+```
+~/app # ls tests/postgresql/sqls
 __init__.py  clear_table.sql  create_table.sql  delete_sale.sql  drop_table.sql  insert_sale.sql  select_sales.sql  update_sale.sql
-app \# poetry run python
+~/app # poetry run python
 ```
 
 ```python
@@ -93,9 +95,9 @@ app \# poetry run python
 
 ### Unittest
 
-```bash
-app \# make lint
-app \# make test
+```
+~/app # make lint
+~/app # make test
 ```
 
 
